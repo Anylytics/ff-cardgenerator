@@ -9,7 +9,7 @@ var colorMap = {
 function rotateColor(current_color) {
     for (var c in colorMap) {
         if (colorMap[c]===current_color) {
-            return colorMap[genNextIndex(c)] || "#fff";
+            return colorMap[genNextIndex(c)] || "#ecf0f1";
         }
     }
     return colorMap[0];
@@ -18,6 +18,14 @@ function rotateColor(current_color) {
         idx++;
         if (idx>4) return -1;
         return idx;
+    }
+}
+
+function colorToId(color) {
+    for (var c in colorMap) {
+        if (colorMap[c]===color) {
+            return c || -1;
+        }
     }
 }
 

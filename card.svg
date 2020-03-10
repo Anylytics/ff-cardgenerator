@@ -5,7 +5,6 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
@@ -25,14 +24,14 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:window-width="1319"
-     inkscape:window-height="723"
+     inkscape:window-height="918"
      id="namedview949"
      showgrid="false"
-     inkscape:zoom="1.4142136"
-     inkscape:cx="68.378201"
-     inkscape:cy="137.76712"
-     inkscape:window-x="2092"
-     inkscape:window-y="225"
+     inkscape:zoom="1"
+     inkscape:cx="189.16355"
+     inkscape:cy="87.173205"
+     inkscape:window-x="290"
+     inkscape:window-y="140"
      inkscape:window-maximized="0"
      inkscape:current-layer="layer1" />
   <defs
@@ -65,16 +64,11 @@
        ry="0"
        rx="0"
        y="43.37537"
-       x="-40.326595"
+       x="100.87378"
        height="177.57874"
-       width="44.268921"
+       width="52.886784"
        id="rect4236"
-       style="opacity:1;fill:#e1b12c;fill-opacity:1;stroke:none;stroke-width:6.4000001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-    <path
-       id="path4762"
-       d="M 6.3128016,39.990777 V 220.99078"
-       style="fill:none;fill-rule:evenodd;stroke:#2f3640;stroke-width:6.4000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       inkscape:connector-curvature="0" />
+       style="opacity:1;fill:#e1b12c;fill-opacity:1;stroke:none;stroke-width:6.99526358;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
     <circle
        style="opacity:1;fill:#000000;fill-opacity:0;stroke:#d3d7de;stroke-width:5.14091825;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:5.14091816, 15.42275446;stroke-dashoffset:0;stroke-opacity:1"
        id="six"
@@ -160,16 +154,6 @@
       <title
          id="title4864">(1,1)</title>
     </circle>
-    <path
-       id="industry"
-       d="m 40.34375,3.1992188 c -20.577143,0 -37.1445312,16.5673882 -37.1445312,37.1445312 v 108.57031 c 0,20.57715 16.5673882,37.14258 37.1445312,37.14258 h 66.61064 V 3.1992188 Z"
-       style="opacity:1;fill:#97f78a;fill-opacity:1;stroke:#2f3640;stroke-width:6.4000001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ssssccs"
-       transform="translate(51.085713,37.733636)">
-      <title
-         id="title4876">Industry</title>
-    </path>
     <text
        id="text4242"
        y="21.743965"
@@ -181,7 +165,7 @@
          id="tspan4244" /></text>
     <g
        id="g4748"
-       transform="translate(-150.77291,0.49475145)">
+       transform="translate(-3.0294751,0.49475145)">
       <g
          id="g4274"
          transform="translate(0,0.1755639)">
@@ -349,37 +333,6 @@
            id="g4708" />
       </g>
     </g>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.6251955px;line-height:1.25;font-family:'Routed Gothic Wide';-inkscape-font-specification:'Routed Gothic Wide';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.24062987"
-       id="productLine"
-       transform="translate(2.578125,-6.09375)"><textPath
-         xlink:href="#path4843"
-         startOffset="50%"
-         id="textPath4845"><tspan
-   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Routed Gothic Wide';-inkscape-font-specification:'Routed Gothic Wide';text-align:center;text-anchor:middle;stroke-width:0.24062987"
-   id="tspan4750">Product Line</tspan></textPath></text>
-    <g
-       id="g4852"
-       transform="matrix(1.3249634,0,0,1.3249634,-11.049266,-111.47228)">
-      <circle
-         r="14.460923"
-         cy="184.03062"
-         cx="105.47523"
-         id="path4796"
-         style="opacity:1;fill:#e1b12c;fill-opacity:1;fill-rule:nonzero;stroke:#2f3640;stroke-width:2.8125;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:22.63246918px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#2f3640;fill-opacity:1;stroke:none;stroke-width:0.3806361px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="96.192383"
-         y="192.07576"
-         id="val"><title
-           id="title4874">Value</title><tspan
-           id="tspan4737"
-           x="96.192383"
-           y="192.07576"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Routed Gothic Wide';-inkscape-font-specification:'Routed Gothic Wide';stroke-width:0.3806361px">5</tspan></text>
-    </g>
     <path
        transform="translate(51.085713,37.733636)"
        sodipodi:nodetypes="csc"
@@ -401,18 +354,38 @@
            height="50.91169"
            x="24.04163"
            y="26.511803" /></flowRegion><flowPara
-         id="flowPara4871">Onli</flowPara></flowRoot>    <text
+         id="flowPara4871">Onli</flowPara></flowRoot>    <path
+       style="fill:#f0d793;fill-opacity:1;stroke:none;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 104.75759,120.51296 49.99188,-13.39528 v 36.59555 l -50.37736,13.49857 z"
+       id="path902"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       id="path4762"
+       d="M 156.13104,39.990777 V 220.99078"
+       style="fill:none;fill-rule:evenodd;stroke:#2f3640;stroke-width:6.4000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:connector-curvature="0" />
+    <path
+       id="industry"
+       d="m 40.34375,3.1992188 c -20.577143,0 -37.1445312,16.5673882 -37.1445312,37.1445312 v 108.57031 c 0,20.57715 16.5673882,37.14258 37.1445312,37.14258 H 52.595557 V 3.1992188 Z"
+       style="opacity:1;fill:#97f78a;fill-opacity:1;stroke:#2f3640;stroke-width:6.4000001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ssssccs"
+       transform="translate(51.085713,37.733636)">
+      <title
+         id="title4876">Industry</title>
+    </path>
+    <text
+       id="val"
+       y="128.52333"
+       x="123.96191"
+       style="font-style:normal;font-weight:normal;font-size:83.49076843000000281px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#2f3640;fill-opacity:1;stroke:#e4e6eb;stroke-width:2.8125;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;"
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:25.7081337px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.64270335"
-       x="-196.22339"
-       y="96.490837"
-       id="featureLabel"
-       transform="rotate(-90)"
-       inkscape:label="#text4899"><tspan
-         sodipodi:role="line"
-         id="tspan4897"
-         x="-196.22339"
-         y="96.490837"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Routed Gothic Narrow';-inkscape-font-specification:'Routed Gothic Narrow';stroke-width:0.64270335">Online Booking</tspan></text>
+       transform="rotate(13.114989)"><title
+         id="title4874">Value</title><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Routed Gothic Wide';-inkscape-font-specification:'Routed Gothic Wide';stroke:#e4e6eb;stroke-width:2.8125;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;"
+         y="128.52333"
+         x="123.96191"
+         id="tspan4737">5</tspan></text>
   </g>
 </svg>

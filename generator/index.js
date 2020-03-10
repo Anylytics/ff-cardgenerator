@@ -6,15 +6,21 @@ schematic: Array<9>
 */
 
 var CardDefault = {
-    productLine: "Air Travel",
-    featureLabel: "Online Booking",
+    productLine: "Product Line/Industry",
+    featureLabel: "Product Label/Feature",
     productId: 0,
-    value: 2,
-    schematic: [0,0,-1,0,0,-1,-1,-1,-1]
+    value: 5,
+    schematic: [-1,-1,-1,-1,-1,-1,-1,-1,-1]
 };
 
-var cardSvg;
+function CardGenerator(name, schematic) {
 
+}
+
+var cardSvg;
+var cardRenderZone = document.getElementById("featureContainer");
+var activeCard;
+var savedCards = [];
 
 d3.xml("../card.svg").then(initSvg);
 
@@ -23,19 +29,49 @@ function initSvg(svgData) {
     attachCard(CardDefault);
 }
 
+function resetCard() {
+    if (!activeCard) return;
+    var reset = []
+    CardDefault.schematic.forEach(function(val,idx) {
+        var thisColor = "#ecf0f1";
+        var thisId = "#" + idMap[idx];
+        d3.select("#" + activeCard).select(thisId)
+            .style('stroke', thisColor)
+            .style('fill', thisColor)
+            .style('fill-opacity', 0.25)
+            .attr('col', thisColor);
+    });
+}
+
+function writeOutput(input) {
+    var el = document.getElementById("outputData");
+    var original = el.value;
+    el.value = (original||"") + "\n" + input;
+}
+
+function saveCard() {
+    var schematic = [];
+    CardDefault.schematic.forEach(function(val,idx) {        var thisColor = "#ecf0f1";
+        var thisId = "#" + idMap[idx];
+        var colorId = colorToId(d3.select("#" + activeCard).select(thisId).attr("col"));
+        schematic.push(colorId===undefined ? -1 : parseInt(colorId));
+    })
+    writeOutput(schematic);
+}
 
 function attachCard(feature) {
     var idVal = "Card_" + new Date().getTime();
+    activeCard = idVal;
 
     cardSvg.id = idVal;
     cardSvg.style.margin = "10px";
 
-    document.body.append(cardSvg);
+    cardRenderZone.append(cardSvg);
 
     var schematic = feature.schematic;
     
     schematic.forEach(function(featureEl, idx) {
-        var thisColor = colorMap[featureEl] || "#ffffff";
+        var thisColor = colorMap[featureEl] || "#ecf0f1";
         var thisId = "#" + idMap[idx];
         d3.select("#" + idVal).select(thisId)
             .style('stroke', thisColor)
@@ -54,5 +90,18 @@ function attachCard(feature) {
     d3.select("#" + idVal).select("#val").select("tspan").text(feature.value);
     d3.select("#" + idVal).select("#productLine").select("tspan").text(feature.productLine);
     d3.select("#" + idVal).select("#featureLabel").select("tspan").text(feature.featureLabel);
-    d3.select("#" + idVal).select("#industry").style("fill", colorMap[feature.productId]).style("fill-opacity", 0.75);
+    
+    var thisIndustryColor = colorMap[feature.productId]
+    d3.select("#" + idVal).select("#industry")
+        .style("fill", thisIndustryColor)
+        .style("fill-opacity", 0.75)
+        .attr('col', thisIndustryColor)
+        .on("click", function() {
+            
+            var lastColor = d3.select(this).attr('col');
+            var nextColor = rotateColor(lastColor);
+            d3.select(this).style('fill', nextColor)
+                            .attr('col', nextColor);
+        });
+    
 }
