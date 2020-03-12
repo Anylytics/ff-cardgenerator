@@ -7,7 +7,7 @@ schematic: Array<9>
 
 var CardDefault = {
     productLine: "Product Line/Industry",
-    featureLabel: "Product Label/Feature",
+    featureLabel: "Printing Press",
     productId: 0,
     value: 5,
     schematic: [-1,-1,-1,-1,-1,-1,-1,-1,-1]
@@ -22,7 +22,7 @@ var cardRenderZone = document.getElementById("featureContainer");
 var activeCard;
 var savedCards = [];
 
-d3.xml("../card.svg").then(initSvg);
+d3.xml("../blueprint.svg").then(initSvg);
 
 function initSvg(svgData) {
     cardSvg = svgData.documentElement;
@@ -89,7 +89,7 @@ function attachCard(feature) {
 
     d3.select("#" + idVal).select("#val").select("tspan").text(feature.value);
     d3.select("#" + idVal).select("#productLine").select("tspan").text(feature.productLine);
-    d3.select("#" + idVal).select("#featureLabel").select("tspan").text(feature.featureLabel);
+    d3.select("#" + idVal).select("#featureLabel").select("textPath").text(feature.featureLabel);
     
     var thisIndustryColor = colorMap[feature.productId]
     d3.select("#" + idVal).select("#industry")

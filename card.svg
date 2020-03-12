@@ -5,6 +5,7 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
@@ -23,15 +24,15 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1319"
-     inkscape:window-height="918"
+     inkscape:window-width="1108"
+     inkscape:window-height="1035"
      id="namedview949"
      showgrid="false"
-     inkscape:zoom="1"
-     inkscape:cx="189.16355"
-     inkscape:cy="87.173205"
-     inkscape:window-x="290"
-     inkscape:window-y="140"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="94.113868"
+     inkscape:cy="101.34259"
+     inkscape:window-x="6"
+     inkscape:window-y="23"
      inkscape:window-maximized="0"
      inkscape:current-layer="layer1" />
   <defs
@@ -387,5 +388,15 @@
          y="128.52333"
          x="123.96191"
          id="tspan4737">5</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.10379124px;line-height:1.25;font-family:'Routed Gothic Wide';-inkscape-font-specification:'Routed Gothic Wide';letter-spacing:8.03473663px;word-spacing:0px;fill:#2f3640;fill-opacity:1;stroke:none;stroke-width:0.47634339"
+       id="featureLabel"
+       x="3.9774756"
+       y="3.314563"
+       transform="matrix(0.94906248,0,0,0.94906248,9.7385894,7.000584)"
+       inkscape:label="#text906"><textPath
+         xlink:href="#industry"
+         id="textPath908">WAR</textPath></text>
   </g>
 </svg>

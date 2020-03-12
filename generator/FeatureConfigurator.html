@@ -7,21 +7,15 @@
      <script src="https://d3js.org/d3.v5.js"></script>
      <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
+      <script src="https://unpkg.com/peerjs@1.0.0/dist/peerjs.min.js"></script>
+
       <link rel="stylesheet" href="https://unpkg.com/chota@latest">
       <style>
         body {
           font-family: sans-serif;
         }
-        #data-holder {
-          width: 250px;
-          display: inline-block;
-        }
-        #data {
-          width:250px;
-          height: 100px;
-        }
-        #generate {
-          width: 250px;
+        button:focus {
+            outline: var(--color-primary) thin dotted;
         }
       </style>
  
@@ -48,6 +42,10 @@
                     <option value="3">Ground Transport</option>
                     <option value="4">Entertainment</option>
                 </select>-->
+                <label for="featureLabel">Feature Label</label>
+                <input id="featureLabel" type="text"></input>
+                <label for="valueRange">Feature Value</label>
+                <input id="valueRange" type="range" min="1" max="9" value="5"></input>
                 <label for="outputData">Output Data</label>
                 <textarea id="outputData">
                     
@@ -67,6 +65,7 @@
     </div>
 
  
+    <script src="controls.js"></script>
     <script src="../utils/utils.js"></script>
     <script src="index.js"></script>
 </body>
