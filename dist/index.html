@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+     content="width=device-width, initial-scale=1, user-scalable=yes">
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://unpkg.com/peerjs@1.0.0/dist/peerjs.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/chota@latest">
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-left">
+          <a class="brand" href="#">Feature Factory</a>
+          <div class="tabs">
+            <a>Link 1</a>
+            <a class="active">Link 2</a>
+          </div>
+        </div>
+        <div class="nav-right">
+          <input class="button outline" placeholder="Loading Game ID..." readonly id="peer-id-input"/>
+        </div>
+    </nav>
+    <input class="input" type="text" placeholder="Say Hello 👋" id="inputChat"/>
+    <button class="button outline primary" id="inputSend">Connect</button>
+    <div id="msgs"></div>
+      
+    <script src="bundle.js"></script>
+</body>
+</html>
