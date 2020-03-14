@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <h3> Feature Factory </h3>
-    <img src="../../assets/logo.svg">
     <router-view/>
   </div>
 </template>
