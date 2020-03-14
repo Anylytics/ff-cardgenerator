@@ -1,72 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <meta name="viewport"
-     content="width=device-width, initial-scale=1, user-scalable=yes">
-     <script src="https://d3js.org/d3.v5.js"></script>
-     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-      <script src="https://unpkg.com/peerjs@1.0.0/dist/peerjs.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+  <script src="https://d3js.org/d3.v5.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://unpkg.com/peerjs@1.0.0/dist/peerjs.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-      <link rel="stylesheet" href="https://unpkg.com/chota@latest">
-      <style>
-        body {
-          font-family: sans-serif;
-        }
-        button:focus {
-            outline: var(--color-primary) thin dotted;
-        }
-      </style>
- 
+  <!-- <link rel="stylesheet" href="https://unpkg.com/chota@latest"> -->
+  <style>
+    html, body {
+      font-family: sans-serif;
+      height: 100%;
+    }
+
+    .flex-fill {
+      flex:1;
+    }
+
+    button:focus {
+      outline: var(--color-primary) thin dotted;
+    }
+
+    .card-fluid {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .bg-red {
+      background: rgb(196, 50, 53);
+    }
+
+    .bg-blue {
+      background: rgb(50, 101, 196);
+    }
+  </style>
 </head>
-<body>
-    
-    <div class="row">
-        <div class="col-12 col-8-md">
-          <div class="card is-center">
-            <form role="form" novalidate>
-                <!--
 
-    productLine: "Air Travel",
-    featureLabel: "Online Booking",
-    productId: 0,
-    value: 2,
-    schematic: [0,0,-1,0,0,-1,-1,-1,-1]
-                
-                <label for="productLine">Product Line</label>
-                <select name="productLine" id="productLine" >
-                    <option value="0">Air Travel</option>
-                    <option value="1">Hotels</option>
-                    <option value="2">Dining</option>
-                    <option value="3">Ground Transport</option>
-                    <option value="4">Entertainment</option>
-                </select>-->
-                <label for="featureLabel">Feature Label</label>
-                <input id="featureLabel" type="text"></input>
-                <label for="valueRange">Feature Value</label>
-                <input id="valueRange" type="range" min="1" max="9" value="5"></input>
-                <label for="outputData">Output Data</label>
-                <textarea id="outputData">
-                    
+<body>
+  <div class="container-fluid d-flex h-100 flex-column">
+    <div class="row h-100">
+      <div class="col-4 bg-red">
+        <div class="row h-100 card flex-grow-1">
+          <form role="form" novalidate>
+             <label for="featureLabel">Feature Label</label>
+            <input id="featureLabel" type="text"></input>
+            <label for="valueRange">Feature Value</label>
+            <input id="valueRange" type="range" min="1" max="9" value="5"></input>
+            <label for="outputData">Output Data</label>
+            <textarea id="outputData">
+
                 </textarea>
-              </form>
-          </div>
+          </form>
         </div>
-        <div class="col-12 col-4-md">
-          <div class="card is-center">
-              <div id="featureContainer"></div>
-          </div>
+      </div>
+      <div class="col-8 bg-blue">
+        <div class="card is-center card-fluid">
+          <div id="featureContainer"></div>
           <div class="is-center">
             <button class="button primary" onclick="saveCard()">Save</button>
             <button class="button" onclick="resetCard()">Reset</button>
           </div>
         </div>
-    </div>
 
- 
-    <script src="controls.js"></script>
-    <script src="../utils/utils.js"></script>
-    <script src="index.js"></script>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="controls.js"></script>
+  <script src="../utils/utils.js"></script>
+  <script src="index.js"></script>
 </body>
+
 </html>

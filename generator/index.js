@@ -22,7 +22,7 @@ var cardRenderZone = document.getElementById("featureContainer");
 var activeCard;
 var savedCards = [];
 
-d3.xml("../blueprint.svg").then(initSvg);
+d3.xml("../card.svg").then(initSvg);
 
 function initSvg(svgData) {
     cardSvg = svgData.documentElement;

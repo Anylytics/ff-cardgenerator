@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import NavBar from '@/components/NavBar';
+import Editor from '@/components/Editor-App';
 
 Vue.use(Router);
 
@@ -8,8 +8,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'NavBar',
-      component: NavBar,
+      name: 'Editor',
+      component: Editor,
     },
   ],
 });
