@@ -1,8 +1,8 @@
-import Editor from '@/components/Editor-App';
+import Industries from '@/components/Industry-List';
 
 <template>
   <div class="industries">
-    <h1 v-for="industry in industries">{{ industry.name }}</h1>
+    <Industries/>
   </div>
 </template>
 <script>
