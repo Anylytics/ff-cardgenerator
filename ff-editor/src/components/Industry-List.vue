@@ -5,21 +5,21 @@
 </template>
 <script>
 export default {
-  name: 'NavBar',
+  name: 'Industries',
   data() {
     return {
       industries: [
         {
-          name: "healthcare"
+          name: "healthcare",
         },
         {
-          name: "military"
+          name: "military",
         },
         {
-          name: "travel"
+          name: "travel",
         },
         {
-          name: "entertainment"
+          name: "entertainment",
         },
       ],
     };

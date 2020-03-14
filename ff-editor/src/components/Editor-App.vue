@@ -1,29 +1,19 @@
-import Industries from '@/components/Industry-List';
+
 
 <template>
   <div class="industries">
-    <Industries/>
+    <Industries />
   </div>
 </template>
 <script>
+import Industries from '@/components/Industry-List';
 export default {
-  name: 'NavBar',
+  name: 'EditorApp',
+  components: {
+    Industries
+  },
   data() {
     return {
-      industries: [
-        {
-          name: "healthcare"
-        },
-        {
-          name: "military"
-        },
-        {
-          name: "travel"
-        },
-        {
-          name: "entertainment"
-        },
-      ],
     };
   },
 };
