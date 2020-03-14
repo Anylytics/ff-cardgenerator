@@ -1,6 +1,6 @@
 <template>
   <div class="industries">
-    <h1 v-for"industry in industries">{{ industries }}</h1>
+    <h1 v-for="industry in industries">{{ industry.name }}</h1>
   </div>
 </template>
 <script>
