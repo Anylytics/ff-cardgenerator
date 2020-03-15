@@ -1,19 +1,28 @@
 
 
 <template>
-  <div class="industries">
-    <Industries />
+  <div class="row">
+    <div class="col-3">
+      <ConfigForm/>
+    </div>
+    <div class="col-9">
+      <Industries/>
+    </div>
   </div>
 </template>
 <script>
 import Industries from '@/components/Industry-List';
+import ConfigForm from '@/components/Data-Reader';
+
 export default {
   name: 'EditorApp',
   components: {
-    Industries
+    Industries,
+    ConfigForm,
   },
   data() {
     return {
+      product: 'test',
     };
   },
 };
