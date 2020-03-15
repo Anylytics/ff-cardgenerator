@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <img src="../../assets/logo.svg"/>
-    <h3> <b>Feature Factory</b> Editor</h3>
-    <router-view/>
+    <img src="../../assets/logo.svg" />
+    <h3><b>Feature Factory</b> Editor</h3>
+    <router-view />
   </div>
 </template>
 
@@ -23,7 +23,7 @@ export default {
   margin-top: 10px;
   margin-left: 10px;
 }
-#app img {
+#app > img {
   height: 25px;
   display: inline;
 }

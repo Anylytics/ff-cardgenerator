@@ -8,6 +8,7 @@ const store = new Vuex.Store({
   state: {
     count: 0,
     industry: 'Hello World',
+    value: 5,
   },
   mutations: {
     increment(state) {
@@ -15,6 +16,9 @@ const store = new Vuex.Store({
     },
     setIndustry(state, msg) {
       state.industry = msg;
+    },
+    setValue(state, val) {
+      state.value = parseInt(val, 0) || 0;
     },
   },
 });

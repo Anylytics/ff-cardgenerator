@@ -1,5 +1,3 @@
-
-
 <template>
   <div>
     <form>
@@ -11,7 +9,7 @@
   </div>
 </template>
 <script>
-import store from '@/manager/dataManager';
+import store from '@/utils/dataManager';
 
 export default {
   name: 'DataReader',
@@ -29,10 +27,17 @@ export default {
         store.commit('setIndustry', value);
       },
     },
+    value: {
+      get() {
+        return store.state.value;
+      },
+      set(value) {
+        store.commit('setValue', value);
+      },
+    },
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-</style>
+<style scoped></style>

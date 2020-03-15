@@ -1,11 +1,16 @@
 <template>
-  <div class="industries">{{ industry }}</div>
+  <div class="industries"><ProductTile /></div>
 </template>
 <script>
-import store from '@/manager/dataManager';
+import store from '@/utils/dataManager';
+import ProductTile from '@/components/GamePieces/Product-Tile';
 
 export default {
   name: 'Industries',
+  mounted() {},
+  components: {
+    ProductTile,
+  },
   computed: {
     count() {
       return store.state.count;
