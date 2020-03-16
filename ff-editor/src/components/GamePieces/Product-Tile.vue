@@ -1,4 +1,3 @@
-/* eslint-disable */
 <template>
   <svg
     xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -10,7 +9,7 @@
     width="81.634796mm"
     height="53.412571mm"
     viewBox="0 0 289.25715 189.25714"
-    id="svg4157"
+    v-bind:id="identifier"
     version="1.1"
   >
     <defs id="defs4159" />
@@ -368,7 +367,7 @@
           y="128.52333"
           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Routed Gothic Wide';-inkscape-font-specification:'Routed Gothic Wide';stroke:#e4e6eb;stroke-width:2.8125;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;"
         >
-          {{ value }}
+          0
         </tspan>
       </text>
       <text
@@ -380,7 +379,7 @@
         xml:space="preserve"
       >
         <textPath id="textPath908" xlink:href="#industry">
-          {{ industry }}
+          hello
         </textPath>
       </text>
     </g>
@@ -389,9 +388,53 @@
 
 <script>
 import store from '@/utils/dataManager';
+import * as d3 from 'd3';
+import colorTools from '@/utils/colorTools';
+
+function bindGraphic(card) {
+  Object.keys(colorTools.getNameToId()).forEach((idx) => {
+    const slot = card.select('#' + idx);
+    slot.on('click', function() {});
+  });
+}
+
+function onMount() {
+  const cardmodel = this.cardmodel;
+  this.card = d3.select('svg#' + this.identifier);
+  store.subscribe((mutation, state) => {
+    if (mutation.type === 'setIndustry') {
+      this.card
+        .select('#featureLabel')
+        .select('textPath')
+        .text(state.industry);
+    }
+    if (mutation.type === 'setValue') {
+      this.card
+        .select('#val')
+        .select('tspan')
+        .text(parseInt(state.value, 0));
+    }
+  });
+
+  this.cardmodel.state.schematic.forEach((val, idx) => {
+    const slot = this.card.select('#' + colorTools.getIdToName()[idx]);
+    slot.on('click', function() {
+      cardmodel.commit('setSchematic', {
+        id: idx,
+      });
+      const newColor = cardmodel.state.schematic_color[idx];
+      d3.select(this)
+        .style('fill', newColor)
+        .style('fill-opacity', 0.25)
+        .style('stroke', newColor);
+    });
+  });
+}
 
 export default {
   name: 'Industries',
+  props: ['identifier', 'cardmodel'],
+  mounted: onMount,
   computed: {
     industry() {
       return store.state.industry;
@@ -402,3 +445,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+svg > * {
+  user-select: none;
+}
+</style>

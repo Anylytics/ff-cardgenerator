@@ -6,13 +6,14 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    count: 0,
+    currentCard: null,
     industry: 'Hello World',
     value: 5,
+    schematic: new Array(9).fill(0),
   },
   mutations: {
-    increment(state) {
-      state.count += 1;
+    setCard(state, card) {
+      state.currentCard = card;
     },
     setIndustry(state, msg) {
       state.industry = msg;
