@@ -20,9 +20,7 @@ export default {
     },
   },
   mounted: () => {
-    console.log(store.state.currentCard);
     store.commit('setCard', cardStore.state.cards[0]);
-    console.log(store.state.currentCard);
   },
   computed: {
     product: {

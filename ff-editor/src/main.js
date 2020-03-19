@@ -13,3 +13,5 @@ new Vue({
   components: { App },
   template: '<App/>',
 });
+
+document.addEventListener('onmousedown', event => event.preventDefault());

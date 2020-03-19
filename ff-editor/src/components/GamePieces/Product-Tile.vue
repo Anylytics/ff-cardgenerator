@@ -394,14 +394,14 @@ import colorTools from '@/utils/colorTools';
 function bindGraphic(card) {
   Object.keys(colorTools.getNameToId()).forEach((idx) => {
     const slot = card.select('#' + idx);
-    slot.on('click', function() {});
   });
 }
 
 function onMount() {
   const cardmodel = this.cardmodel;
   this.card = d3.select('svg#' + this.identifier);
-  store.subscribe((mutation, state) => {
+  cardmodel.subscribe((mutation, state) => {
+    console.log(mutation);
     if (mutation.type === 'setIndustry') {
       this.card
         .select('#featureLabel')
@@ -414,21 +414,31 @@ function onMount() {
         .select('tspan')
         .text(parseInt(state.value, 0));
     }
+    if (mutation.type === 'setSchematic') {
+      const schematic = this.cardmodel.state.schematic_color;
+      console.log(schematic);
+      schematic.forEach((val,idx) => {
+        const slot = this.card.select('#' + colorTools.getIdToName()[idx])
+        slot
+          .style('fill', newColor)
+          .style('fill-opacity', 0.25)
+          .style('stroke', newColor);
+        }
+      );
+      }
+      
   });
 
   this.cardmodel.state.schematic.forEach((val, idx) => {
     const slot = this.card.select('#' + colorTools.getIdToName()[idx]);
     slot.on('click', function() {
+      console.log(idx);
       cardmodel.commit('setSchematic', {
         id: idx,
       });
-      const newColor = cardmodel.state.schematic_color[idx];
-      d3.select(this)
-        .style('fill', newColor)
-        .style('fill-opacity', 0.25)
-        .style('stroke', newColor);
     });
   });
+  
 }
 
 export default {
