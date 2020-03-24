@@ -1,9 +1,10 @@
-// This file will be used to store the application state
 import Vuex from 'vuex';
 import Vue from 'vue';
 import colorTools from './colorTools';
 
 Vue.use(Vuex);
+
+const flatWhite = '#ecf0f1';
 
 function generateNewCard() {
   return new Vuex.Store({
@@ -16,7 +17,7 @@ function generateNewCard() {
       industry_color: '',
       value: 2,
       schematic: new Array(9).fill(-1),
-      schematic_color: new Array(9).fill('#fff'),
+      schematic_color: new Array(9).fill(flatWhite),
     },
     mutations: {
       setProductName(state, val) {
@@ -24,7 +25,7 @@ function generateNewCard() {
       },
       setIndustry(state, val) {
         state.industry = val;
-        state.industry_color = colorTools.colorMap[val] || '#fff';
+        state.industry_color = colorTools.colorMap[val] || flatWhite;
       },
       setValue(state, val) {
         state.value = parseInt(val, 0) || 0;
@@ -34,23 +35,26 @@ function generateNewCard() {
           data.value || colorTools.genNextIndex(state.schematic[data.id]);
         state.schematic[data.id] = val;
         state.schematic_color[data.id] =
-          colorTools.getColorMap()[val] || '#fff';
+          colorTools.getColorMap()[val] || flatWhite;
+      },
+    },
+  });
+}
+function generateNewCardStore() {
+  return new Vuex.Store({
+    state: {
+      cards: [generateNewCard()],
+    },
+    mutations: {
+      addCard(state) {
+        state.cards.push(generateNewCard());
       },
     },
   });
 }
 
-const cardStore = new Vuex.Store({
-  state: {
-    cards: [],
-  },
-  mutations: {
-    addCard(state) {
-      state.cards.push(generateNewCard());
-    },
-  },
-});
+const cardStore = generateNewCardStore();
 
 cardStore.commit('addCard');
 
-export default cardStore;
+export { cardStore, generateNewCardStore };

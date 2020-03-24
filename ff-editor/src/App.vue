@@ -20,8 +20,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
   color: #2c3e50;
-  margin-top: 10px;
-  margin-left: 10px;
+  margin: 10px;
 }
 #app > img {
   height: 25px;
@@ -31,5 +30,8 @@ export default {
   display: inline;
   font-size: 25px;
   vertical-align: center;
+}
+*:focus {
+  outline: dashed 1px grey;
 }
 </style>

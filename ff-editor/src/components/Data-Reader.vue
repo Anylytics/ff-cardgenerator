@@ -10,7 +10,7 @@
 </template>
 <script>
 import store from '@/utils/dataManager';
-import cardStore from '@/utils/cardManager';
+import { cardStore } from '@/utils/cardManager';
 
 export default {
   name: 'DataReader',

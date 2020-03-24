@@ -398,10 +398,10 @@ function bindGraphic(card) {
 }
 
 function onMount() {
+  console.log('mounting this svg', this.identifier, this.cardmodel);
   const cardmodel = this.cardmodel;
   this.card = d3.select('svg#' + this.identifier);
   cardmodel.subscribe((mutation, state) => {
-    console.log(mutation);
     if (mutation.type === 'setIndustry') {
       this.card
         .select('#featureLabel')
@@ -416,21 +416,23 @@ function onMount() {
     }
     if (mutation.type === 'setSchematic') {
       const schematic = this.cardmodel.state.schematic_color;
-      console.log(schematic);
-      schematic.forEach((val,idx) => {
-        const slot = this.card.select('#' + colorTools.getIdToName()[idx])
+      schematic.forEach((val, idx) => {
+        const slot = this.card.select('#' + colorTools.getIdToName()[idx]);
         slot
-          .style('fill', newColor)
+          .style('fill', val)
           .style('fill-opacity', 0.25)
-          .style('stroke', newColor);
-        }
-      );
-      }
-      
+          .style('stroke', val);
+      });
+    }
   });
 
-  this.cardmodel.state.schematic.forEach((val, idx) => {
+  this.cardmodel.state.schematic_color.forEach((val, idx) => {
     const slot = this.card.select('#' + colorTools.getIdToName()[idx]);
+    console.log('for each', slot);
+    slot
+      .style('fill', val)
+      .style('fill-opacity', 0.25)
+      .style('stroke', val === '#fff' ? 'whitesmoke' : val);
     slot.on('click', function() {
       console.log(idx);
       cardmodel.commit('setSchematic', {
@@ -438,21 +440,12 @@ function onMount() {
       });
     });
   });
-  
 }
 
 export default {
   name: 'Industries',
   props: ['identifier', 'cardmodel'],
   mounted: onMount,
-  computed: {
-    industry() {
-      return store.state.industry;
-    },
-    value() {
-      return store.state.value;
-    },
-  },
 };
 </script>
 

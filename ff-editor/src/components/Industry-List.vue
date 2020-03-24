@@ -1,7 +1,7 @@
 <template>
   <div class="industries">
     <div>
-      <button class="button" v-on:click="greet">Add a new Card!</button>
+      <button class="button" v-on:click="add">Add a new Card!</button>
     </div>
     <ProductTile
       v-for="card in cards"
@@ -13,8 +13,9 @@
 </template>
 <script>
 import store from '@/utils/dataManager';
-import cardStore from '@/utils/cardManager';
+import { cardStore } from '@/utils/cardManager';
 import ProductTile from '@/components/GamePieces/Product-Tile';
+import industryStore from '@/utils/industryManager';
 
 export default {
   name: 'Industries',
@@ -30,11 +31,15 @@ export default {
       return store.state.industry;
     },
     cards() {
-      return cardStore.state.cards;
+      const selected = industryStore.state.selected;
+      if (!selected) return [];
+      return selected.state.cardStore.state.cards;
     },
   },
   methods: {
-    greet: () => {
+    add: () => {
+      const selected = industryStore.state.selected;
+      if (!selected) return;
       cardStore.commit('addCard');
     },
   },
@@ -45,5 +50,8 @@ export default {
 <style scoped>
 .industries {
   font-weight: 700;
+}
+button {
+  margin: 10px;
 }
 </style>
