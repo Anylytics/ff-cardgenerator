@@ -6,17 +6,17 @@ import Peer from 'peerjs';
 import App from './App';
 import router from './router';
 import store from './store';
-import {randomInteger, indexToPos, posToIndex} from './utils.js';
+import { randomInteger, indexToPos, posToIndex } from './utils';
 
-Vue.use(VuePeerJS, new Peer({}), {store});
+Vue.use(VuePeerJS, new Peer({}), { store });
 Vue.config.productionTip = false;
 Vue.mixin({
   methods: {
-    randomInteger : randomInteger,
-    indexToPos: indexToPos,
-    posToIndex: posToIndex,
-  }
-})
+    randomInteger,
+    indexToPos,
+    posToIndex,
+  },
+});
 
 /* eslint-disable no-new */
 new Vue({
@@ -24,5 +24,5 @@ new Vue({
   router,
   store,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
 });

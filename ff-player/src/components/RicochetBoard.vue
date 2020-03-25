@@ -11,7 +11,7 @@
       <div v-for="element of elements" :key="'element'+element.id">
         <!-- This div represents all the elements (robots) !-->
         <!-- <transition name="fade"> -->
-        <div :style="elementStyle(element)" v-show="true" :class="elementClass(element)"></div>
+        <div :style="elementStyle(element)" v-show="true" :class="elementClass()"></div>
         <!-- </transition> -->
       </div>
     </div>
@@ -19,36 +19,36 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import "../css/global.css";
-
+import { mapState } from 'vuex';
+import '../css/global.css';
+/* eslint-disable no-param-reassign, no-mixed-operators, no-console */
 export default {
-  name: "RicochetBoard",
+  name: 'RicochetBoard',
   data() {
     return {
       nrows: 5,
       ncolumns: 5,
       blockSize: 80,
-      robotSize: 50
+      robotSize: 50,
     };
   },
   created() {
-    this.$store.commit("clearBoard");
-    this.createRobot("#ee4035");
-    this.createRobot("#0392cf");
-    this.createRobot("#7bc043");
-    this.$store.commit("selectElement", {id: 1});
+    this.$store.commit('clearBoard');
+    this.createRobot('#ee4035');
+    this.createRobot('#0392cf');
+    this.createRobot('#7bc043');
+    this.$store.commit('selectElement', { id: 1 });
   },
   computed: {
     mapScale() {
-      let smallest =
+      const smallest =
         window.innerWidth > window.innerHeight
           ? window.innerHeight
           : window.innerWidth;
-      let size = smallest > 800 ? 800 : smallest;
+      const size = smallest > 800 ? 800 : smallest;
       return (size / (this.boardSize * this.blockSize)) * 0.9;
     },
-    ...mapState(["boardSize", "elements", "boardMap", "selectedElement", "connection"])
+    ...mapState(['boardSize', 'elements', 'boardMap', 'selectedElement', 'connection']),
   },
   methods: {
     createRobot(color) {
@@ -58,66 +58,63 @@ export default {
         position = [this.randomInteger(0, 4), this.randomInteger(0, 4)];
         index = this.posToIndex(position, this.boardSize);
       } while (index in this.boardMap);
-      let element = {
-        type: "robot",
-        color: color,
+      const element = {
+        type: 'robot',
+        color,
         pos: position,
         size: 40,
-        selected: false
+        selected: false,
       };
-      this.$store.commit("addElement", {element:element});
+      this.$store.commit('addElement', { element });
     },
     setBlockSize(obj = {}) {
-      obj.width = this.blockSize + "px";
-      obj.height = this.blockSize + "px";
+      obj.width = `${this.blockSize}px`;
+      obj.height = `${this.blockSize}px`;
       return obj;
     },
     setPieceSize(obj = {}, width, height) {
-      obj.width = width + "px";
-      obj.height = height + "px";
+      obj.width = `${width}px`;
+      obj.height = `${height}px`;
       return obj;
     },
     getMapStyle() {
       return {
-        width: this.boardSize * this.blockSize + 8 + "px",
-        transform: "scale(" + this.mapScale + ")"
+        width: `${this.boardSize * this.blockSize + 8}px`,
+        transform: `scale(${this.mapScale})`,
       };
     },
     posToStyle(pos, itemsize = 80) {
-      let [x, y] = pos;
-      let offset = (this.blockSize - itemsize) / 2;
+      const [x, y] = pos;
+      const offset = (this.blockSize - itemsize) / 2;
       return {
-        top: x * this.blockSize + offset + "px",
-        left: y * this.blockSize + offset + "px"
+        top: `${x * this.blockSize + offset}px`,
+        left: `${y * this.blockSize + offset}px`,
       };
     },
     elementStyle(element) {
-      let style = this.posToStyle(element.pos, element.size);
-      style["background-color"] = element.color;
+      const style = this.posToStyle(element.pos, element.size);
+      style['background-color'] = element.color;
       if (element.selected === true) {
-        style.animation = `pulsing 0.5s ease-in-out infinite alternate both`;
+        style.animation = 'pulsing 0.5s ease-in-out infinite alternate both';
       }
       return this.setPieceSize(style, element.size, element.size);
     },
-    elementClass(element) {
-      let style = ["unit", "robot", "green"];
+    elementClass() {
+      const style = ['unit', 'robot', 'green'];
       return style;
     },
     tileClicked(tileIndex) {
       console.log(tileIndex);
       if (tileIndex in this.boardMap) {
-        let element = this.boardMap[tileIndex];
-        if (element.type === "robot"){
-          this.$store.commit("selectElement", {id: element.id});
+        const element = this.boardMap[tileIndex];
+        if (element.type === 'robot') {
+          this.$store.commit('selectElement', { id: element.id });
         }
+      } else if (this.selectedElement !== undefined) {
+        this.$store.commit('moveElement', { id: this.selectedElement.id, to_index: tileIndex });
       }
-      else {
-        if (this.selectedElement != undefined) {
-          this.$store.commit("moveElement", {id: this.selectedElement.id, to_index: tileIndex});
-        }
-      }
-    }
-  }
+    },
+  },
 };
 </script>
 

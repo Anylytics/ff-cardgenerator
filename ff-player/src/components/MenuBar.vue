@@ -6,14 +6,18 @@
         </div>
   </div>-->
   <div class="container">
-    <div class="row">
-      Your Peer Id: {{peerId}}
-    </div>
+    <div class="row">Your Peer Id: {{peerId}}</div>
     <div class="row">
       <form action="#" method="post" v-on:submit.prevent="submitForm">
-        <input class="form-control" type="text" v-model="remotePeer" placeholder="Insert Remote Peer Id" :readonly="connection != undefined"/>
+        <input
+          class="form-control"
+          type="text"
+          v-model="remotePeer"
+          placeholder="Insert Remote Peer Id"
+          :readonly="connection != undefined"
+        />
         <button type="submit" class="btn btn-primary" :disabled="connection != undefined">
-          <div v-if="connection === undefined"> Connect </div>
+          <div v-if="connection === undefined">Connect</div>
           <div v-else>Connected!</div>
         </button>
       </form>
@@ -22,18 +26,22 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex';
+/* eslint-disable no-console */
 export default {
-  name: "MenuBar",
+  name: 'MenuBar',
   created() {
-    let vuethis = this;
-    this.$peer.on("open", function(id) {
-      console.log("Peer Id " + id);
+    const vuethis = this;
+    this.$peer.on('open', (id) => {
+      console.log(`Peer Id ${id}`);
       vuethis.peerId = id;
     });
-    this.$peer.on("connection", function(conn) {
-      vuethis.$store.dispatch("setupConnection", {connection: conn, sendBoardState: true});
-      //vuethis.connection = conn;
+    this.$peer.on('connection', (conn) => {
+      vuethis.$store.dispatch('setupConnection', {
+        connection: conn,
+        sendBoardState: true,
+      });
+      // vuethis.connection = conn;
     });
   },
   data() {
@@ -43,24 +51,27 @@ export default {
     };
   },
   computed: {
-    ...mapState(["connection"])
+    ...mapState(['connection']),
   },
   methods: {
-    submitForm () {
-      if (this.remotePeer != undefined) {
-        console.log("attempting to connect");
-         let conn = this.$peer.connect(this.remotePeer);
-         this.$store.dispatch("setupConnection", {connection: conn, sendBoardState: false});
+    submitForm() {
+      if (this.remotePeer !== undefined) {
+        console.log('attempting to connect');
+        const conn = this.$peer.connect(this.remotePeer);
+        this.$store.dispatch('setupConnection', {
+          connection: conn,
+          sendBoardState: false,
+        });
       }
     },
     buttonClass(path) {
       return {
         btn: true,
-        "btn-primary": this.$route.path === path,
-        "btn-seconday": this.$route.path !== path
+        'btn-primary': this.$route.path === path,
+        'btn-seconday': this.$route.path !== path,
       };
     },
-  }
+  },
 };
 </script>
 
