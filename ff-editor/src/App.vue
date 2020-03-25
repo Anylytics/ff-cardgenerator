@@ -13,6 +13,7 @@ export default {
 </script>
 
 <style>
+@import 'https://unpkg.com/chota@latest';
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
