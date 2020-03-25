@@ -398,7 +398,6 @@ function bindGraphic(card) {
 }
 
 function onMount() {
-  console.log('mounting this svg', this.identifier, this.cardmodel);
   const cardmodel = this.cardmodel;
   this.card = d3.select('svg#' + this.identifier);
   cardmodel.subscribe((mutation, state) => {
@@ -428,13 +427,11 @@ function onMount() {
 
   this.cardmodel.state.schematic_color.forEach((val, idx) => {
     const slot = this.card.select('#' + colorTools.getIdToName()[idx]);
-    console.log('for each', slot);
     slot
       .style('fill', val)
       .style('fill-opacity', 0.25)
       .style('stroke', val === '#fff' ? 'whitesmoke' : val);
     slot.on('click', function() {
-      console.log(idx);
       cardmodel.commit('setSchematic', {
         id: idx,
       });
@@ -452,5 +449,8 @@ export default {
 <style scoped>
 svg > * {
   user-select: none;
+}
+svg {
+  margin: 10px;
 }
 </style>

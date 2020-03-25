@@ -23,6 +23,12 @@ function generateIndustry() {
       setName(state, name) {
         state.name = name;
       },
+      setActive(state) {
+        state.active = true;
+      },
+      inactivate(state) {
+        state.active = false;
+      },
     },
   });
 }
@@ -40,9 +46,9 @@ const industryStore = new Vuex.Store({
       state.selected = industry;
       state.industries.forEach((ind) => {
         const thisIndustry = ind;
-        thisIndustry.active = false;
+        thisIndustry.commit('inactivate');
       });
-      state.selected.active = true;
+      industry.commit('setActive');
     },
   },
 });

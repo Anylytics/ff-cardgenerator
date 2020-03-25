@@ -13,7 +13,6 @@
 </template>
 <script>
 import store from '@/utils/dataManager';
-import { cardStore } from '@/utils/cardManager';
 import ProductTile from '@/components/GamePieces/Product-Tile';
 import industryStore from '@/utils/industryManager';
 
@@ -40,7 +39,7 @@ export default {
     add: () => {
       const selected = industryStore.state.selected;
       if (!selected) return;
-      cardStore.commit('addCard');
+      selected.state.cardStore.commit('addCard');
     },
   },
 };

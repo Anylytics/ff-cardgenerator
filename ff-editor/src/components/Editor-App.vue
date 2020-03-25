@@ -1,7 +1,6 @@
 <template>
   <div class="row">
     <div class="col-3 control-panel">
-      <div class="card text-center">{{ selectedIndustry }}</div>
       <NewIndustryBtn />
       <div
         v-for="industry in industries"
