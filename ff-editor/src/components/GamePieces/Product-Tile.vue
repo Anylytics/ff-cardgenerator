@@ -10,16 +10,19 @@ import ProductTile from '@/assets/product-tile.svg';
 function onMount() {
   const cardmodel = this.cardmodel;
   this.card = d3.select(`svg#${this.identifier}`);
+  // TODO: Make this more efficient
   d3.xml(ProductTile).then((data) => {
     this.card.node().append(data.documentElement);
     const cardTitle = this.card.select('#featureLabel').select('textPath');
     const cardValue = this.card.select('#val').select('tspan');
+    const cardFuture = this.card.select('#future').select('tspan');
+    const cardArt = this.card.select('#productArt');
 
     cardmodel.subscribe((mutation, state) => {
-      if (mutation.type === 'setIndustry') {
-        cardTitle.text(state.industry);
+      if (mutation.type === 'setProductName') {
+        cardTitle.text(state.product);
       }
-      if (mutation.type === 'setValue') {
+      if (mutation.type === 'setValue' || mutation.type === 'setSchematic') {
         cardValue.text(parseInt(state.value, 0));
       }
       if (mutation.type === 'setSchematic') {
@@ -34,9 +37,20 @@ function onMount() {
       }
     });
 
+    cardTitle.text(cardmodel.state.product);
+    cardValue.text(cardmodel.state.value);
+    cardFuture.text('Hello!');
+
     cardTitle.on('click', () => {
-      cardTitle.text('Wheeeee');
+      // eslint-disable-next-line
+      cardmodel.commit('setProductName', prompt());
     });
+    cardValue.on('click', () => {
+      // eslint-disable-next-line
+      cardmodel.commit('setValue', prompt());
+    });
+
+    cardArt.on('click', console.log);
 
     this.cardmodel.state.schematic_color.forEach((val, idx) => {
       const slot = this.card.select(`#${colorTools.getIdToName()[idx]}`);

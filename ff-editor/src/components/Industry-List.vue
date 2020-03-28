@@ -3,24 +3,27 @@
     <div>
       <button class="button" v-on:click="add">Add a new Card!</button>
     </div>
-    <ProductTile
-      v-for="card in cards"
-      :key="card.state.id"
-      :identifier="card.state.id"
-      :cardmodel="card"
-    />
+    <draggable v-model="cards" @start="drag = true" @end="drag = false">
+      <transition-group type="transition">
+        <div v-for="card in cards" :key="card.state.id" class="inline">
+          <ProductTile :identifier="card.state.id" :cardmodel="card" />
+        </div>
+      </transition-group>
+    </draggable>
   </div>
 </template>
 <script>
 import store from '@/utils/dataManager';
 import ProductTile from '@/components/GamePieces/Product-Tile';
 import industryStore from '@/utils/industryManager';
+import draggable from 'vuedraggable';
 
 export default {
   name: 'Industries',
   mounted() {},
   components: {
     ProductTile,
+    draggable,
   },
   computed: {
     count() {
@@ -29,10 +32,17 @@ export default {
     industry() {
       return store.state.industry;
     },
-    cards() {
-      const selected = industryStore.state.selected;
-      if (!selected) return [];
-      return selected.state.cardStore.state.cards;
+    cards: {
+      get() {
+        const selected = industryStore.state.selected;
+        if (!selected) return [];
+        return selected.state.cardStore.state.cards;
+      },
+      set(cards) {
+        const selected = industryStore.state.selected;
+        if (!selected) return;
+        selected.state.cardStore.commit('updateCards', cards);
+      },
     },
   },
   methods: {
@@ -50,7 +60,7 @@ export default {
 .industries {
   font-weight: 700;
 }
-button {
-  margin: 10px;
+.inline {
+  display: inline-block;
 }
 </style>

@@ -21,7 +21,9 @@ function generateNewCard() {
     },
     mutations: {
       setProductName(state, val) {
-        state.product = val;
+        const maxLen = 26;
+        const leadingSpaces = new Array((maxLen - val.length) / 2).fill(' ');
+        state.product = leadingSpaces.join('') + val;
       },
       setIndustry(state, val) {
         state.industry = val;
@@ -36,6 +38,11 @@ function generateNewCard() {
         state.schematic[data.id] = val;
         state.schematic_color[data.id] =
           colorTools.getColorMap()[val] || flatWhite;
+        let summedVal = 0;
+        state.schematic.forEach((thisVal) => {
+          if (thisVal > -1) summedVal += 1;
+        });
+        if (summedVal >= 2) state.value = parseInt(summedVal, 0) || 0;
       },
     },
   });
@@ -48,6 +55,9 @@ function generateNewCardStore() {
     mutations: {
       addCard(state) {
         state.cards.push(generateNewCard());
+      },
+      updateCards(state, inputCards) {
+        state.cards = inputCards;
       },
     },
   });
