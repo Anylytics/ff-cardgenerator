@@ -40,18 +40,24 @@ export default new Vuex.Store({
     clearBoard(state) {
       state.elements = [];
       state.boardMap = {};
+      state.tokenList = [];
+      state.selectedToken = undefined;
       state.nextId = 1;
     },
     addObstacles(state, boards) {
       state.obstacleMap = { ...boards[0].walls, ...boards[1].walls, ...boards[2].walls, ...boards[3].walls};
     },
-    addTokens(state, tokens) {
-      state.tokenList = tokens;
-      state.selectedToken = 0;
+    selectToken(state, payload) {
+      let {index} = payload;
+      if (state.selectedToken !== undefined) {
+        state.tokenList[state.selectedToken].visible=false;
+      }
+      state.selectedToken = index;
       state.tokenList[state.selectedToken].visible=true;
     },
     changeToken(state, payload) {
       let {direction} = payload;
+      console.log("running change token "+direction+" "+state.selectedToken);
       relayOverNetwork(state, payload, 'changeToken');
       let nextToken = state.selectedToken+direction;
       if (nextToken<0){
@@ -72,6 +78,9 @@ export default new Vuex.Store({
       const index = posToIndex(element.pos, state.boardSize);
       if (element.type === 'robot'){
         state.boardMap[index] = element;
+      }
+      else if (element.type === 'token') {
+        state.tokenList.push(element);
       }
       state.idMap[element.id] = element;
       state.nextId += 1;
@@ -161,7 +170,7 @@ export default new Vuex.Store({
         }
         commit('addElement', {element});
       });
-      commit('addTokens', allTokens);
+      commit('selectToken', {index: 0 });
       
       //create robots
       await dispatch('createRobot', '#ee4035');
@@ -190,7 +199,7 @@ export default new Vuex.Store({
               relayOverNetwork(state, { id: element.id }, 'selectElement');
             }
           }
-          relayOverNetwork('addTokens', state.tokenList);
+          relayOverNetwork(state, {index: state.selectedToken}, 'selectToken');
         }
       });
     },
