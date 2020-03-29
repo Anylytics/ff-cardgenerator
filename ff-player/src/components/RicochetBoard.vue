@@ -3,15 +3,15 @@
     <div class="map" :style="getMapStyle()" tabindex="0">
       <div
         class="tile"
-        v-for="i in boardSize * boardSize"
+        v-for="i in Array.from(Array(boardSize**2).keys())"
         :key="i"
-        :style="setBlockSize()"
-        @click="tileClicked(i-1)"
+        :style="setBlockStyle({}, i)"
+        @click="tileClicked(i)"
       ></div>
       <div v-for="element of elements" :key="'element'+element.id">
         <!-- This div represents all the elements (robots) !-->
         <!-- <transition name="fade"> -->
-        <div :style="elementStyle(element)" v-show="true" :class="elementClass()"></div>
+        <div :style="elementStyle(element)" v-show="true" :class="elementClass(element)"></div>
         <!-- </transition> -->
       </div>
     </div>
@@ -20,6 +20,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import { board1, board2, board3, board4, transposeBoard } from '@/boards'
 import '../css/global.css';
 /* eslint-disable no-param-reassign, no-mixed-operators, no-console */
 export default {
@@ -33,11 +34,7 @@ export default {
     };
   },
   created() {
-    this.$store.commit('clearBoard');
-    this.createRobot('#ee4035');
-    this.createRobot('#0392cf');
-    this.createRobot('#7bc043');
-    this.$store.commit('selectElement', { id: 1 });
+    this.$store.dispatch('createBoard');
   },
   computed: {
     mapScale() {
@@ -48,28 +45,19 @@ export default {
       const size = smallest > 800 ? 800 : smallest;
       return (size / (this.boardSize * this.blockSize)) * 0.9;
     },
-    ...mapState(['boardSize', 'elements', 'boardMap', 'selectedElement', 'connection']),
+    ...mapState(['boardSize', 'elements', 'boardMap', 'obstacleMap', 'selectedElement', 'connection']),
   },
   methods: {
-    createRobot(color) {
-      let position = [this.randomInteger(0, 4), this.randomInteger(0, 4)];
-      let index = this.posToIndex(position, this.boardSize);
-      do {
-        position = [this.randomInteger(0, 4), this.randomInteger(0, 4)];
-        index = this.posToIndex(position, this.boardSize);
-      } while (index in this.boardMap);
-      const element = {
-        type: 'robot',
-        color,
-        pos: position,
-        size: 40,
-        selected: false,
-      };
-      this.$store.commit('addElement', { element });
-    },
-    setBlockSize(obj = {}) {
+    setBlockStyle(obj = {}, index) {
       obj.width = `${this.blockSize}px`;
       obj.height = `${this.blockSize}px`;
+      if (this.obstacleMap[index] !== undefined){
+          this.obstacleMap[index].forEach(element => {
+            obj['border-'+element]= '5px solid #4a4e4d';
+          });
+          
+          
+      }
       return obj;
     },
     setPieceSize(obj = {}, width, height) {
@@ -99,8 +87,9 @@ export default {
       }
       return this.setPieceSize(style, element.size, element.size);
     },
-    elementClass() {
-      const style = ['unit', 'robot', 'green'];
+    elementClass(element) {
+      let style = ['unit'];
+      style.push(element.type);
       return style;
     },
     tileClicked(tileIndex) {
@@ -125,6 +114,7 @@ export default {
   background-color: #70c7da;
   border: #71b4c3 solid 1px;
   box-sizing: border-box;
+
 }
 .map {
   display: flex;
@@ -150,6 +140,11 @@ export default {
 
 .robot {
   background-color: #363636;
+  border-color: #141414;
+}
+
+.token {
+  border-radius: 50%;
   border-color: #141414;
 }
 </style>

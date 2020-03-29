@@ -1,9 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { indexToPos, posToIndex } from './utils';
-
+import { indexToPos, posToIndex, randomInteger } from './utils';
+import { board1, board2, board3, board4, transposeBoard } from './boards'
 Vue.use(Vuex);
-
 /* eslint-disable no-param-reassign, no-console */
 function relayOverNetwork(state, payload, functionName) {
   if (payload.fromNetwork === undefined && state.connection !== undefined) {
@@ -22,12 +21,13 @@ export default new Vuex.Store({
       done: [],
     },
     nextId: 1,
-    boardSize: 5,
+    boardSize: 16,
     elements: [
     ],
     boardMap: {
 
     },
+    obstacleMap: {},
     idMap: {
 
     },
@@ -40,6 +40,9 @@ export default new Vuex.Store({
       state.boardMap = {};
       state.nextId = 1;
     },
+    addObstacles(state, boards) {
+      state.obstacleMap = { ...boards[0].walls, ...boards[1].walls, ...boards[2].walls, ...boards[3].walls};
+    },
     addItem(state, item) {
       state.items.todo.push(Object.assign(item, { id: state.nextId }));
       state.nextId += 1;
@@ -48,7 +51,9 @@ export default new Vuex.Store({
       element.id = state.nextId;
       state.elements.push(element);
       const index = posToIndex(element.pos, state.boardSize);
-      state.boardMap[index] = element;
+      if (element.type === 'robot'){
+        state.boardMap[index] = element;
+      }
       state.idMap[element.id] = element;
       state.nextId += 1;
     },
@@ -87,6 +92,45 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    async createRobot({ commit, state }, color) {
+      let position = [randomInteger(0, state.boardSize - 1), randomInteger(0, state.boardSize - 1)];
+      let index = posToIndex(position, state.boardSize);
+      do {
+        position = [randomInteger(0, state.boardSize - 1), randomInteger(0, state.boardSize - 1)];
+        index = posToIndex(position, state.boardSize);
+      } while (index in state.boardMap);
+      const element = {
+        type: 'robot',
+        color,
+        pos: position,
+        size: 40,
+        selected: false,
+      };
+      commit('addElement', { element });
+    },
+    async createBoard({ commit, state, dispatch }) {
+      commit('clearBoard');
+      //select boards
+      let boards = [transposeBoard(board1, [0, 0]), transposeBoard(board2, [0, 1]), transposeBoard(board3, [1, 0]), transposeBoard(board4, [1, 1])];
+      commit('addObstacles', boards);
+      boards.forEach(board => {
+        board.tokens.forEach(t => {
+          let element = {
+            type: 'token',
+            color: '#b3cde0',
+            pos: indexToPos(t, state.boardSize),
+            size: 40,
+            selected: false,
+          };
+          commit('addElement', {element});
+        });
+      });
+      //create robots
+      await dispatch('createRobot', '#ee4035');
+      await dispatch('createRobot', '#0392cf');
+      await dispatch('createRobot', '#7bc043');
+      //commit('selectElement', { id: 1 });
+    },
     setupConnection({ commit, state }, { connection, sendBoardState }) {
       // Setup all the handlers with a connection
       state.connection = connection;
