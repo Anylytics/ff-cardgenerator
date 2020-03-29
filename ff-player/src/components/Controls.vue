@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     changeToken(direction) {
-        this.$store.commit("selectToken",direction)
+        this.$store.commit("changeToken",{direction: direction})
     }
   }
 };

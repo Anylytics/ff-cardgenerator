@@ -50,9 +50,11 @@ export default new Vuex.Store({
       state.selectedToken = 0;
       state.tokenList[state.selectedToken].visible=true;
     },
-    selectToken(state, direction) {
+    changeToken(state, payload) {
+      let {direction} = payload;
+      relayOverNetwork(state, payload, 'changeToken');
       let nextToken = state.selectedToken+direction;
-      if (nextToken<=0){
+      if (nextToken<0){
         nextToken = state.tokenList.length-1;
       }
       nextToken = nextToken % state.tokenList.length;
@@ -188,6 +190,7 @@ export default new Vuex.Store({
               relayOverNetwork(state, { id: element.id }, 'selectElement');
             }
           }
+          relayOverNetwork('addTokens', state.tokenList);
         }
       });
     },
