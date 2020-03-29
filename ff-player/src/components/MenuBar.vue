@@ -1,10 +1,4 @@
 <template>
-  <!-- <div class="menubar">
-        <div class="btn-group" role="group" aria-label="Menu bar">
-            <router-link to="/board" :class="buttonClass('/board')">Board</router-link>
-            <router-link to="/backlog" :class="buttonClass('/backlog')">Backlog</router-link>
-        </div>
-  </div>-->
   <div class="container">
     <div class="row">Your Peer Id: {{peerId}}</div>
     <div class="row">
@@ -26,20 +20,20 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 /* eslint-disable no-console */
 export default {
-  name: 'MenuBar',
+  name: "MenuBar",
   created() {
     const vuethis = this;
-    this.$peer.on('open', (id) => {
+    this.$peer.on("open", id => {
       console.log(`Peer Id ${id}`);
       vuethis.peerId = id;
     });
-    this.$peer.on('connection', (conn) => {
-      vuethis.$store.dispatch('setupConnection', {
+    this.$peer.on("connection", conn => {
+      vuethis.$store.dispatch("setupConnection", {
         connection: conn,
-        sendBoardState: true,
+        sendBoardState: true
       });
       // vuethis.connection = conn;
     });
@@ -47,31 +41,31 @@ export default {
   data() {
     return {
       peerId: undefined,
-      remotePeer: undefined,
+      remotePeer: undefined
     };
   },
   computed: {
-    ...mapState(['connection']),
+    ...mapState(["connection"])
   },
   methods: {
     submitForm() {
       if (this.remotePeer !== undefined) {
-        console.log('attempting to connect');
+        console.log("attempting to connect");
         const conn = this.$peer.connect(this.remotePeer);
-        this.$store.dispatch('setupConnection', {
+        this.$store.dispatch("setupConnection", {
           connection: conn,
-          sendBoardState: false,
+          sendBoardState: false
         });
       }
     },
     buttonClass(path) {
       return {
         btn: true,
-        'btn-primary': this.$route.path === path,
-        'btn-seconday': this.$route.path !== path,
+        "btn-primary": this.$route.path === path,
+        "btn-seconday": this.$route.path !== path
       };
-    },
-  },
+    }
+  }
 };
 </script>
 

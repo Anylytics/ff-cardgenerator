@@ -27,12 +27,14 @@ export default new Vuex.Store({
     boardMap: {
 
     },
+    tokenList: [],
     obstacleMap: {},
     idMap: {
 
     },
     connection: undefined,
     selectedElement: undefined,
+    selectedToken: undefined,
   },
   mutations: {
     clearBoard(state) {
@@ -42,6 +44,21 @@ export default new Vuex.Store({
     },
     addObstacles(state, boards) {
       state.obstacleMap = { ...boards[0].walls, ...boards[1].walls, ...boards[2].walls, ...boards[3].walls};
+    },
+    addTokens(state, tokens) {
+      state.tokenList = tokens;
+      state.selectedToken = 0;
+      state.tokenList[state.selectedToken].visible=true;
+    },
+    selectToken(state, direction) {
+      let nextToken = state.selectedToken+direction;
+      if (nextToken<=0){
+        nextToken = state.tokenList.length-1;
+      }
+      nextToken = nextToken % state.tokenList.length;
+      state.tokenList[state.selectedToken].visible=false;
+      state.selectedToken = nextToken;
+      state.tokenList[state.selectedToken].visible=true;
     },
     addItem(state, item) {
       state.items.todo.push(Object.assign(item, { id: state.nextId }));
@@ -101,10 +118,12 @@ export default new Vuex.Store({
       } while (index in state.boardMap);
       const element = {
         type: 'robot',
-        color,
+        style: 'square',
+        color: color,
         pos: position,
         size: 40,
         selected: false,
+        visible: true,
       };
       commit('addElement', { element });
     },
@@ -113,22 +132,40 @@ export default new Vuex.Store({
       //select boards
       let boards = [transposeBoard(board1, [0, 0]), transposeBoard(board2, [0, 1]), transposeBoard(board3, [1, 0]), transposeBoard(board4, [1, 1])];
       commit('addObstacles', boards);
-      boards.forEach(board => {
-        board.tokens.forEach(t => {
+      //TODO: Move into a seperate function
+      let allTokens = []
+      boards.forEach( (board, idx) => {
+        board.tokens.forEach( (t,idy) => {
           let element = {
             type: 'token',
-            color: '#b3cde0',
+            style: 'circle',
+            color: 'black',
             pos: indexToPos(t, state.boardSize),
             size: 40,
             selected: false,
+            visible: false,
           };
-          commit('addElement', {element});
+          allTokens.push(element);
+          
         });
       });
+      let specialIdx = randomInteger(0, allTokens.length);
+      let tokenColors = ['#ee4035', '#0392cf', '#7bc043', '#fdf498'];
+      allTokens.forEach( (t,idx) => {
+        let element = t;
+        element.color = tokenColors[idx%tokenColors.length]
+        if (idx === specialIdx) {
+          element.color = '#3d1e6d';
+        }
+        commit('addElement', {element});
+      });
+      commit('addTokens', allTokens);
+      
       //create robots
       await dispatch('createRobot', '#ee4035');
       await dispatch('createRobot', '#0392cf');
       await dispatch('createRobot', '#7bc043');
+      await dispatch('createRobot', '#fdf498');
       //commit('selectElement', { id: 1 });
     },
     setupConnection({ commit, state }, { connection, sendBoardState }) {

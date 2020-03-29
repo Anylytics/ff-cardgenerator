@@ -2,20 +2,22 @@
   <div id="app">
     <div class="page-header">
       <h1>Ricochet Robot</h1>
-      <p class="lead">An example of a Kanban board, written in Vue.js</p>
     </div>
     <menu-bar></menu-bar>
+    <controls></controls>
     <router-view/>
+    
   </div>
 </template>
-
 <script>
 import MenuBar from '@/components/MenuBar';
+import Controls from '@/components/Controls';
 
 export default {
   name: 'app',
   components: {
     'menu-bar': MenuBar,
+    'controls': Controls,
   },
 };
 </script>
