@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { indexToPos, posToIndex, randomInteger } from './utils';
+import { indexToPos, posToIndex, randomInteger, shuffle } from './utils';
 import { board1, board2, board3, board4, transposeBoard } from './boards'
 Vue.use(Vuex);
 /* eslint-disable no-param-reassign, no-console */
@@ -141,7 +141,8 @@ export default new Vuex.Store({
     async createBoard({ commit, state, dispatch }) {
       commit('clearBoard');
       //select boards
-      let boards = [transposeBoard(board1, [0, 0]), transposeBoard(board2, [0, 1]), transposeBoard(board3, [1, 0]), transposeBoard(board4, [1, 1])];
+      let boardParts = shuffle([board1, board2, board3, board4])
+      let boards = [transposeBoard(boardParts[0], [0, 0]), transposeBoard(boardParts[1], [0, 1]), transposeBoard(boardParts[2], [1, 0]), transposeBoard(boardParts[3], [1, 1])];
       commit('addObstacles', boards);
       //TODO: Move into a seperate function
       let allTokens = []
@@ -160,6 +161,7 @@ export default new Vuex.Store({
           
         });
       });
+      allTokens = shuffle(allTokens);
       let specialIdx = randomInteger(0, allTokens.length);
       let tokenColors = ['#ee4035', '#0392cf', '#7bc043', '#fdf498'];
       allTokens.forEach( (t,idx) => {
