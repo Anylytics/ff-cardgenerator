@@ -8,9 +8,9 @@
           type="text"
           v-model="remotePeer"
           placeholder="Insert Remote Peer Id"
-          :readonly="connection != undefined"
+          :readonly="connections.length > 0"
         />
-        <button type="submit" class="btn btn-primary" :disabled="connection != undefined">
+        <button type="submit" class="btn btn-primary" :disabled="connections.length > 0">
           <div v-if="connection === undefined">Connect</div>
           <div v-else>Connected!</div>
         </button>
@@ -31,6 +31,7 @@ export default {
       vuethis.peerId = id;
     });
     this.$peer.on("connection", conn => {
+      console.log("Got Connection");
       vuethis.$store.dispatch("setupConnection", {
         connection: conn,
         sendBoardState: true
@@ -45,7 +46,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["connection"])
+    ...mapState(["connections"])
   },
   methods: {
     submitForm() {

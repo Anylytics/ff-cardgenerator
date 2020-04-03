@@ -5,10 +5,12 @@ import { board1, board2, board3, board4, transposeBoard } from './boards'
 Vue.use(Vuex);
 /* eslint-disable no-param-reassign, no-console */
 function relayOverNetwork(state, payload, functionName) {
-  if (payload.fromNetwork === undefined && state.connection !== undefined) {
-    console.log('relaying ', functionName);
+  if (payload.fromNetwork === undefined && state.connections.length > 0) {
+    console.log('relaying '+functionName+' to '+state.connections.length+' connections');
     payload.functionName = functionName;
-    state.connection.send(payload);
+    state.connections.forEach( (con) => {
+      con.send(payload);
+    });
   }
 }
 
@@ -32,7 +34,7 @@ export default new Vuex.Store({
     idMap: {
 
     },
-    connection: undefined,
+    connections: [],
     selectedElement: undefined,
     selectedToken: undefined,
   },
@@ -141,7 +143,7 @@ export default new Vuex.Store({
     async createBoard({ commit, state, dispatch }) {
       commit('clearBoard');
       //select boards
-      let boardParts = shuffle([board1, board2, board3, board4])
+      let boardParts = [board1, board2, board3, board4]
       let boards = [transposeBoard(boardParts[0], [0, 0]), transposeBoard(boardParts[1], [0, 1]), transposeBoard(boardParts[2], [1, 0]), transposeBoard(boardParts[3], [1, 1])];
       commit('addObstacles', boards);
       //TODO: Move into a seperate function
@@ -183,12 +185,20 @@ export default new Vuex.Store({
     },
     setupConnection({ commit, state }, { connection, sendBoardState }) {
       // Setup all the handlers with a connection
-      state.connection = connection;
+      state.connections.push(connection);
       connection.on('open', () => {
         console.log('Connection open, setting up handlers');
         connection.on('data', (payload) => {
-          payload.fromNetwork = true;
           console.log('recieved ', payload.functionName);
+          //forward it on, if we need to
+          state.connections.forEach( con => {
+            if (con !== connection) {
+              console.log("Forwarding network message")
+              con.send(payload);
+            }
+          })
+          payload.fromNetwork = true;
+          
           commit(payload.functionName, payload);
         });
 
