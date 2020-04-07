@@ -99,8 +99,13 @@ export default {
 </script>
 
 <style>
+@font-face {
+  font-family: 'Routed Gothic Wide';
+  src: url('~@/assets/routed-gothic-wide.ttf');
+}
 svg * {
   user-select: none;
+  font-family: 'Routed Gothic Wide', sans-serif;
 }
 svg {
   margin: 10px;
