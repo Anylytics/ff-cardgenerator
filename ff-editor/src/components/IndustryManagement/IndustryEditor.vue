@@ -1,11 +1,11 @@
 <template>
   <form
-    class="card"
+    class="card animated fadeInLeft"
     v-bind:class="{ 'animated pulse selected': industrymodel.state.active }"
   >
     <div>
-      <label for="product">Industry Name</label>
-      <input id="product" type="text" v-model="name" class="input" />
+      <label>Name</label>
+      <input type="text" v-model="name" class="input" />
     </div>
     <!--div>
       <label for="color">Background</label>
@@ -40,8 +40,10 @@ export default {
 form {
   margin-top: 10px;
   margin-bottom: 10px;
+  background-color: whitesmoke;
 }
 .selected {
   border: 1px solid #2ecc71;
+  background-color: #e5fff0;
 }
 </style>

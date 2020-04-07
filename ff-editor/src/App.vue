@@ -1,7 +1,5 @@
 <template>
-  <div id="app">
-    <img src="../../assets/logo.svg" />
-    <h3><b>Feature Factory</b> Editor</h3>
+  <div class="animated fadeIn" id="app">
     <router-view />
   </div>
 </template>
@@ -20,16 +18,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
   color: #2c3e50;
-  margin: 10px;
 }
 #app > img {
   height: 25px;
   display: inline;
-}
-#app h3 {
-  display: inline;
-  font-size: 25px;
-  vertical-align: center;
 }
 *:focus {
   outline: dashed 1px grey;

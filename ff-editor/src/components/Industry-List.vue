@@ -1,7 +1,16 @@
 <template>
   <div class="industries">
     <div>
-      <button class="button" v-on:click="add">Add a new Card!</button>
+      <h3 class="animated fadeInDown" v-if="!hasSelectedIndustry">
+        Select an Industry to get Started!
+      </h3>
+      <button
+        class="button is-full-width secondary"
+        v-on:click="add"
+        v-if="hasSelectedIndustry"
+      >
+        Add a new <b>{{ hasSelectedIndustry.state.name }}</b> Product!
+      </button>
     </div>
     <draggable v-model="cards" @start="drag = true" @end="drag = false">
       <transition-group type="transition">
@@ -29,8 +38,10 @@ export default {
     count() {
       return store.state.count;
     },
-    industry() {
-      return store.state.industry;
+    hasSelectedIndustry: {
+      get() {
+        return industryStore.state.selected;
+      },
     },
     cards: {
       get() {
@@ -49,7 +60,7 @@ export default {
     add: () => {
       const selected = industryStore.state.selected;
       if (!selected) return;
-      selected.state.cardStore.commit('addCard');
+      selected.commit('addCard');
     },
   },
 };

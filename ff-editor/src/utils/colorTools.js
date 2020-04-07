@@ -5,6 +5,7 @@ const colorMap = {
   3: '#fa983a',
   4: '#8c7ae6',
 };
+const flatWhite = '#ecf0f1';
 
 function genNextIndex(id) {
   let idx = id;
@@ -73,4 +74,5 @@ export default {
   getNameToId,
   getColorMap,
   genNextIndex,
+  flatWhite,
 };
